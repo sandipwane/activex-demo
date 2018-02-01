@@ -31,7 +31,7 @@ Microsoft has created a node module called "windows-build-tools" just for this p
 
 Ideally above two steps should finish installation.  
 
-Facing problem with Python installation
+### Facing problem with Python installation
 
 - If facing such problem remove any previous installation of Python from machine.
 - Remove %USERPROFILE%\.windows-build-tools\
