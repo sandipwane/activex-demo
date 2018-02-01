@@ -22,7 +22,7 @@ Microsoft has created a node module called "windows-build-tools" just for this p
 	```
 - After Successful installation change npm config by running command. 
 	```{r, engine='bash', count_lines}
-	npm config set msvs_version 2012 --global	
+	npm config set msvs_version 2015 --global	
 	```
 - Close all running instances of command prompt or power shell. Open new instance of command prompt and run command to install winax module
 	```{r, engine='bash', count_lines}
