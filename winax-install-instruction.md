@@ -1,23 +1,38 @@
 # Installing node module winax
 
-	The module is Windows C++ Node.JS addon, that implements COM IDispatch object wrapper, analog ActiveXObject on cscript.exe
+The module is Windows C++ Node.JS addon, that implements COM IDispatch object wrapper, analog ActiveXObject on cscript.exe
 
-	When installing this module it needs to compile some native Node modules post download. So a few dependencies (to compile native modules) must be installed before installing this module. 
-	Those dependencies are 
-		- Windows Build Tools
-		- Python
-		- .NET Framework 4.5.1 (Not installed automatically by windows-build-tools npm package)
-	Note: For Windows 7 ot Vista .NET Framework 4.5.1 must be installed separately.
-	Microsoft has created a node module just for this purpose which is called "windows-build-tools" which downloads and installs Windows Build Tools and Python.
+When installing this module it needs to compile some native Node modules post download. So a few dependencies (to compile native modules) must be installed before installing this module. 
+Those dependencies are 
 
-	Steps for installing 
-		- Run Power Shell with admin rights
-		- Enter command  
-			- npm --add-python-to-path='true' --debug install --global windows-build-tools@1.3.2
+- Windows Build Tools
+- Python
+- .NET Framework 4.5.1
 
-	Ideally above two steps should finish installation.  
+__Note :__  For Windows 7 ot Vista .NET Framework 4.5.1 must be installed separately.
 
-	Facing problem with Python installation
-		- If facing such problem remove any previous installation of Python from machine.
-		- Remove %USERPROFILE%\.windows-build-tools\
-		- Run command npm --add-python-to-path='true' --debug install --global windows-build-tools@1.3.2 again.
+Microsoft has created a node module called "windows-build-tools" just for this purpose which downloads and installs Windows Build Tools and Python.
+
+Steps for installing 
+
+- Run Power Shell with admin rights
+- Run command
+	```{r, engine='bash', count_lines}
+	npm --add-python-to-path='true' --debug install --global windows-build-tools@1.3.2	
+	```
+- After Successful installation change npm config by running command. 
+	```{r, engine='bash', count_lines}
+	npm config set msvs_version 2012 --global	
+	```
+
+
+Ideally above two steps should finish installation.  
+
+Facing problem with Python installation
+
+- If facing such problem remove any previous installation of Python from machine.
+- Remove %USERPROFILE%\.windows-build-tools\
+- Run command 
+	```{r, engine='bash', count_lines}
+	npm --add-python-to-path='true' --debug install --global windows-build-tools@1.3.2
+	```
