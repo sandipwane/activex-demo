@@ -13,7 +13,7 @@ __Note :__  For Windows 7 ot Vista .NET Framework 4.5.1 must be installed separa
 
 Microsoft has created a node module called "windows-build-tools" just for this purpose which downloads and installs Windows Build Tools and Python.
 
-Steps for installing 
+## Installation Steps
 
 - Run Power Shell with admin rights
 - Run command
