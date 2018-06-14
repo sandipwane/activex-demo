@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: php
+  namespace: 1528960023898-cb-staging-colortest
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        deploy: php
+        cbservice: php
+    spec:
+      containers:
+        - name: php
+          image: gurunath/colortest
+          ports:
+            - containerPort: 80
+          env:
+            - name: CB_ENV_NAME
+              value: 1528960023898-cb-staging-colortest
+            - name: CB_CLUSTER_ID
+              value: 5b22117ade10571e99ee957d
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    service: php
+    cbservice: php
+  name: php
+  namespace: 1528960023898-cb-staging-colortest
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    deploy: php
+
