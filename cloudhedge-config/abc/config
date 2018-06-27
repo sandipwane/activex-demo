@@ -1,5 +1,57 @@
-failed
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: php
+  namespace: 1530101731435-abc-pooja-apk
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        deploy: php
+        cbservice: php
+    spec:
+      containers:
+        - name: php
+          image: gurunath/colortest
+          env:
+            - name: COLOR
+              value: red
+            - name: CB_ENV_NAME
+              value: 1530101731435-abc-pooja-apk
+            - name: CB_CLUSTER_ID
+              value: 5b22117ade10571e99ee957d
 
 ---
-Cannot read property 'forEach' of undefined
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    service: php
+    cbservice: php
+  name: php
+  namespace: 1530101731435-abc-pooja-apk
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: port8080
+  selector:
+    deploy: php
+
+---
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v1
+metadata:
+  name: php
+  namespace: 1530101731435-abc-pooja-apk
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    name: php
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 50
 
