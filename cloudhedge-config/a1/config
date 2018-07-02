@@ -1,8 +1,8 @@
 kind: Secret
 apiVersion: v1
 metadata:
-  name: 1530514515249-a1-pooja-apk-secret-docker
-  namespace: 1530514515249-a1-pooja-apk
+  name: 1530514943282-a1-pooja-apk-secret-docker
+  namespace: 1530514943282-a1-pooja-apk
 data:
   .dockerconfigjson: test
 type: kubernetes.io/dockerconfigjson
@@ -12,7 +12,7 @@ kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   name: php
-  namespace: 1530514515249-a1-pooja-apk
+  namespace: 1530514943282-a1-pooja-apk
 spec:
   replicas: 1
   template:
@@ -28,11 +28,11 @@ spec:
             - name: COLOR
               value: red
             - name: CB_ENV_NAME
-              value: 1530514515249-a1-pooja-apk
+              value: 1530514943282-a1-pooja-apk
             - name: CB_CLUSTER_ID
               value: 5b35e7fbeab693207e4dfe62
       imagePullSecrets:
-        - name: 1530514515249-a1-pooja-apk-secret-docker
+        - name: 1530514943282-a1-pooja-apk-secret-docker
 
 ---
 kind: Service
@@ -42,7 +42,7 @@ metadata:
     service: php
     cbservice: php
   name: php
-  namespace: 1530514515249-a1-pooja-apk
+  namespace: 1530514943282-a1-pooja-apk
 spec:
   type: NodePort
   ports:
@@ -57,7 +57,7 @@ kind: HorizontalPodAutoscaler
 apiVersion: autoscaling/v1
 metadata:
   name: php
-  namespace: 1530514515249-a1-pooja-apk
+  namespace: 1530514943282-a1-pooja-apk
 spec:
   scaleTargetRef:
     apiVersion: apps/v1beta1
