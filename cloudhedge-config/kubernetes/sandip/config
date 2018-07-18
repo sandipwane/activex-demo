@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: python
+  namespace: 1531907778293-sandip-bucketlistapp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        deploy: python
+        cbservice: python
+    spec:
+      containers:
+        - name: python
+          image: ppanditrao/linux-python-app
+          env:
+            - name: CB_ENV_NAME
+              value: 1531907778293-sandip-bucketlistapp
+            - name: CB_CLUSTER_ID
+              value: 5b4f0e1bd12aa81c71627973
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    service: python
+    cbservice: python
+  name: python
+  namespace: 1531907778293-sandip-bucketlistapp
+spec:
+  type: NodePort
+  ports:
+    - port: 5002
+      targetPort: 5002
+      name: port5002
+  selector:
+    deploy: python
+
