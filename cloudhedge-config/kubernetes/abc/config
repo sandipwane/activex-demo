@@ -1,0 +1,42 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: php
+  namespace: 1531897726258-abc-colortest
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        deploy: php
+        cbservice: php
+    spec:
+      containers:
+        - name: php
+          image: gurunath/colortest
+          env:
+            - name: color
+              value: pink
+            - name: CB_ENV_NAME
+              value: 1531897726258-abc-colortest
+            - name: CB_CLUSTER_ID
+              value: 5b4ee731bae571000f6d4544
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    service: php
+    cbservice: php
+  name: php
+  namespace: 1531897726258-abc-colortest
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      name: port80
+  selector:
+    deploy: php
+
