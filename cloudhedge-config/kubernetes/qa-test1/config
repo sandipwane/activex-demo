@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: qa-test
+  namespace: 1533125261609-qa-test1-qa-test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        deploy: qa-test
+        cbservice: qa-test
+    spec:
+      containers:
+        - name: qa-test
+          image: amithaval/wordp
+          env:
+            - name: CB_ENV_NAME
+              value: 1533125261609-qa-test1-qa-test
+            - name: CB_CLUSTER_ID
+              value: 5b4df73cbae571000f6d4534
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    service: qa-test
+    cbservice: qa-test
+  name: qa-test
+  namespace: 1533125261609-qa-test1-qa-test
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: port8080
+  selector:
+    deploy: qa-test
+
