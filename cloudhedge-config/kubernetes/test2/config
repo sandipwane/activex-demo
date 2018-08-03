@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: qatest2
+  namespace: 1533297676738-test2-qa-test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        deploy: qatest2
+        cbservice: qatest2
+    spec:
+      containers:
+        - name: qatest2
+          image: amithaval/hello
+          env:
+            - name: CB_ENV_NAME
+              value: 1533297676738-test2-qa-test
+            - name: CB_CLUSTER_ID
+              value: 5b643e49e46fac000f72b311
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    service: qatest2
+    cbservice: qatest2
+  name: qatest2
+  namespace: 1533297676738-test2-qa-test
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 90
+      targetPort: 90
+      name: port90
+  selector:
+    deploy: qatest2
+
